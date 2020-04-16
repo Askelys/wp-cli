@@ -1,8 +1,12 @@
 FROM wordpress:cli-2.4-php7.3
 
-USER root
 
-RUN \
-  /bin/bash -c 'php -d memory_limit=1024M "$(which wp)" --allow-root package install git@github.com:nestorandrespe/polylang-cli.git'
+RUN wget https://github.com/nestorandrespe/polylang-cli/archive/master.zip -O /tmp/master.zip
+RUN /bin/bash -c 'php -d memory_limit=1024M /usr/local/bin/wp package install /tmp/master.zip'
+RUN rm /tmp/master.zip
 
-USER www-data
+RUN /bin/bash -c 'php -d memory_limit=1024M /usr/local/bin/wp package list'
+
+
+CMD [ "php", "-d", "memory_limit=1024M", "/usr/local/bin/wp" ]
+ENTRYPOINT [ "php", "-d", "memory_limit=1024M", "/usr/local/bin/wp" ]
