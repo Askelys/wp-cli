@@ -5,5 +5,5 @@ RUN wget https://github.com/nestorandrespe/polylang-cli/archive/master.zip -O /t
 RUN /bin/bash -c 'php -d memory_limit=1024M /usr/local/bin/wp package install /tmp/master.zip'
 RUN rm /tmp/master.zip
 
-ENTRYPOINT [ "/usr/local/bin/php", "-d", "memory_limit=1024M", "/usr/local/bin/wp" ]
-CMD [ "help" ]
+ENTRYPOINT []
+CMD [ "/bin/bash" ]
